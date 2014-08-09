@@ -1,5 +1,7 @@
 package com.ofg.judge.rest
+import com.google.common.eventbus.EventBus
 import com.ofg.judge.dao.JudgeDAO
+import com.ofg.judge.event.RelationshipEvent
 import com.ofg.twitter.controller.relations.CorrelationType
 import com.ofg.twitter.controller.relations.Relation
 import com.ofg.twitter.controller.relations.Relationship
@@ -25,9 +27,12 @@ class RelationshipController {
 	
 	final private JudgeDAO memoryDatabase
 	
+	final private EventBus eventBus
+	
 	@Autowired
-	public RelationshipController(JudgeDAO memoryDatabase) {
+	public RelationshipController(JudgeDAO memoryDatabase, EventBus eventBus) {
 		this.memoryDatabase = memoryDatabase
+		this.eventBus = eventBus
 	}
 
     @RequestMapping(
@@ -43,6 +48,7 @@ class RelationshipController {
 		
 		memoryDatabase.updateRelationship(entity)
 		
+		eventBus.post(new RelationshipEvent(entity))
     }
 
     private static Iterable<Relation> validateScores(RelationshipDto relationship) {

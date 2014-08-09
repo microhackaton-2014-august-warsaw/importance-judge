@@ -47,7 +47,6 @@ appender(console, ConsoleAppender) {
 }
 
 root(INFO, whereToLog)
+logger("com.ofg.judge.rest", DEBUG)
+logger("com.ofg.judge.event.listener", DEBUG)
 logger("com.ofg", DEBUG)
-
-
-
