@@ -5,7 +5,7 @@ import groovy.transform.ToString
 
 @ToString
 @Immutable
-class Relationships{
+class Relationship{
     final int pairId
     final CorrelationType correlationType
     final ArrayList<Relation> relations
