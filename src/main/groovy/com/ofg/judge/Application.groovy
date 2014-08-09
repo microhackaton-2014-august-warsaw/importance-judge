@@ -21,6 +21,6 @@ class Application {
     static void main(String[] args) {
         SpringApplication application = new SpringApplication(Application)
         application.addListeners(new EnvironmentSetupVerifier(Profiles.all()))
-        application
+        application.run(args)
     }
 }
