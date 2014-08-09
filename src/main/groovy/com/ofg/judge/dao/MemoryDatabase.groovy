@@ -1,10 +1,38 @@
 package com.ofg.judge.dao
 
+import com.ofg.twitter.controller.relations.Relation
 import com.ofg.twitter.controller.relations.Relationship
 
+
 class MemoryDatabase implements JudgeDAO{
+    final List<Relationship> relationships;
+
+    MemoryDatabase() {
+        this.relationships = Collections.synchronizedList(new ArrayList<>());
+    }
+
     @Override
     Relationship updateRelationship(Relationship newRelationship) {
-        return newRelationship
+        Relationship workingRelationship = findRelationshipByPairAndCategory(newRelationship)
+
+        if(workingRelationship == null){
+            relationships.add(newRelationship)
+            return newRelationship
+        }else{
+            ArrayList<Relation> workingRelations = workingRelationship.getRelations()
+            workingRelations.addAll(newRelationship.getRelations())
+
+            relationships.remove(workingRelationship)
+            Relationship updatedRelationship = new Relationship(workingRelationship.pairId, workingRelationship.correlationType, workingRelations)
+            relationships.add(updatedRelationship)
+            return updatedRelationship
+        }
+
+    }
+
+    private Relationship findRelationshipByPairAndCategory(newRelationship) {
+        relationships.find({
+            relationship -> relationship.pairId.equals(newRelationship.pairId) && relationship.correlationType.equals(newRelationship.correlationType)
+        })
     }
 }

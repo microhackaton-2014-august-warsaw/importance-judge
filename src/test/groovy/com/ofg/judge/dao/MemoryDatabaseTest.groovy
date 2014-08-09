@@ -1,8 +1,7 @@
 package com.ofg.judge.dao
 
-import com.ofg.twitter.controller.relations.CorrelationType
-import com.ofg.twitter.controller.relations.Relation
 import com.ofg.twitter.controller.relations.Relationship
+import com.ofg.twitter.places.RelationshipExamples
 import spock.lang.Specification
 
 class MemoryDatabaseTest extends Specification {
@@ -11,14 +10,26 @@ class MemoryDatabaseTest extends Specification {
         given:
             MemoryDatabase memoryDatabase = new MemoryDatabase()
 
-        when:
-            def result = memoryDatabase.updateRelationship(input)
-
-        then:
-            result == input
+        expect:
+            memoryDatabase.updateRelationship(RelationshipExamples.withBarPlace()) == RelationshipExamples.withBarPlace()
 
         where:
-            input << [new Relationship(1, CorrelationType.PLACE, [new Relation(2, "foo")])]
+            input << RelationshipExamples.withBarPlace()
+    }
 
+    def "With database with one record, new request should return merged description"() {
+        given:
+            MemoryDatabase memoryDatabase = new MemoryDatabase()
+            memoryDatabase.updateRelationship(firstRequest)
+
+        when:
+            Relationship result = memoryDatabase.updateRelationship(secondRequest)
+
+        then:
+            result == expectedResult
+
+        where:
+            firstRequest                        | secondRequest                       | expectedResult
+            RelationshipExamples.withFooPlace() | RelationshipExamples.withBarPlace() | RelationshipExamples.withFooAndBarPlace()
     }
 }
