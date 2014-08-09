@@ -1,6 +1,5 @@
 package com.ofg.judge.event
 
-import com.ofg.judge.Relationship
 import com.ofg.judge.model.AllRelationships
 
 class RelationshipEvent {

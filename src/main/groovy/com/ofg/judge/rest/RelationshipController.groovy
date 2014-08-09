@@ -2,6 +2,7 @@ package com.ofg.judge.rest
 import com.google.common.eventbus.EventBus
 import com.ofg.judge.dao.JudgeDAO
 import com.ofg.judge.event.RelationshipEvent
+import com.ofg.judge.model.AllRelationships
 import com.ofg.judge.CorrelationType
 import com.ofg.judge.Relation
 import com.ofg.judge.Relationship
@@ -46,9 +47,9 @@ class RelationshipController {
         
 		Relationship entity = new Relationship(relationship.pairId, correlationType, relationship.relationships)
 		
-		memoryDatabase.updateRelationship(entity)
+		AllRelationships result = memoryDatabase.updateRelationship(entity)
 		
-		eventBus.post(new RelationshipEvent(entity))
+		eventBus.post(new RelationshipEvent(result))
     }
 
     private static Iterable<Relation> validateScores(RelationshipDto relationship) {
