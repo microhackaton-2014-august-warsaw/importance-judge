@@ -26,7 +26,7 @@ class MemoryDatabase implements JudgeDAO{
 
             relationships.remove(workingRelationship)
             Collections.sort(workingRelations)
-            Relationship updatedRelationship = new Relationship(workingRelationship.pairId, workingRelationship.correlationType, workingRelations)
+            Relationship updatedRelationship = new Relationship(workingRelationship.pairId, workingRelationship.correlatorType, workingRelations)
             relationships.add(updatedRelationship)
             return updatedRelationship
         }
@@ -35,7 +35,7 @@ class MemoryDatabase implements JudgeDAO{
 
     private Relationship findRelationshipByPairAndCategory(newRelationship) {
         relationships.find({
-            relationship -> relationship.pairId.equals(newRelationship.pairId) && relationship.correlationType.equals(newRelationship.correlationType)
+            relationship -> relationship.pairId.equals(newRelationship.pairId) && relationship.correlatorType.equals(newRelationship.correlatorType)
         })
     }
 }

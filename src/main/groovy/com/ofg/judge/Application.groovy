@@ -14,13 +14,13 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy
 @Configuration
 @EnableAutoConfiguration
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@ComponentScan(basePackages = ["com.ofg.judge", "com.mangofactory.swagger"])
+@ComponentScan(basePackages = ["com.ofg.judge", "com.ofg.twitter" ,"com.mangofactory.swagger"])
 @EnableCaching
 class Application {
 
     static void main(String[] args) {
         SpringApplication application = new SpringApplication(Application)
         application.addListeners(new EnvironmentSetupVerifier(Profiles.all()))
-        application.run(args)
+        application
     }
 }
