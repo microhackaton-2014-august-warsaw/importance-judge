@@ -1,9 +1,10 @@
 package com.ofg.judge.dao
 
+import com.ofg.judge.model.AllRelationships
 import org.springframework.stereotype.Repository;
 
-import com.ofg.twitter.controller.relations.Relation
-import com.ofg.twitter.controller.relations.Relationship
+import com.ofg.judge.Relation
+import com.ofg.judge.Relationship
 
 @Repository
 class MemoryDatabase implements JudgeDAO{
@@ -14,12 +15,12 @@ class MemoryDatabase implements JudgeDAO{
     }
 
     @Override
-    Relationship updateRelationship(Relationship newRelationship) {
+    AllRelationships updateRelationship(Relationship newRelationship) {
         Relationship workingRelationship = findRelationshipByPairAndCategory(newRelationship)
 
         if(workingRelationship == null){
             relationships.add(newRelationship)
-            return newRelationship
+            return new AllRelationships(newRelationship)
         }else{
             ArrayList<Relation> workingRelations = workingRelationship.getRelations()
             workingRelations.addAll(newRelationship.getRelations())
@@ -28,7 +29,7 @@ class MemoryDatabase implements JudgeDAO{
             Collections.sort(workingRelations)
             Relationship updatedRelationship = new Relationship(workingRelationship.pairId, workingRelationship.correlatorType, workingRelations)
             relationships.add(updatedRelationship)
-            return updatedRelationship
+            return new AllRelationships(updatedRelationship)
         }
 
     }

@@ -1,8 +1,8 @@
 package com.ofg.twitter.places;
 
-import com.ofg.twitter.controller.relations.CorrelationType;
-import com.ofg.twitter.controller.relations.Relation;
-import com.ofg.twitter.controller.relations.Relationship;
+import com.ofg.judge.CorrelationType;
+import com.ofg.judge.Relation;
+import com.ofg.judge.Relationship;
 
 public class RelationshipExamples {
 

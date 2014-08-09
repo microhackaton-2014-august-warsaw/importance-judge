@@ -1,9 +1,10 @@
 package com.ofg.judge.dao
 
-import com.ofg.twitter.controller.relations.Relationship
+import com.ofg.judge.Relationship
+import com.ofg.judge.model.AllRelationships
 
 public interface JudgeDAO {
 
-    public Relationship updateRelationship(Relationship newRelationship)
+    public AllRelationships updateRelationship(Relationship newRelationship)
 
 }

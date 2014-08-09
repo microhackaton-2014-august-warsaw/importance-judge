@@ -1,6 +1,6 @@
 package com.ofg.judge.dao
 
-import com.ofg.twitter.controller.relations.Relationship
+import com.ofg.judge.Relationship
 import com.ofg.twitter.places.RelationshipExamples
 import spock.lang.Specification
 

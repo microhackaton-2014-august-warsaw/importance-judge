@@ -2,9 +2,9 @@ package com.ofg.judge.rest
 
 import com.google.common.eventbus.EventBus
 import com.ofg.judge.dao.JudgeDAO
-import com.ofg.twitter.controller.relations.CorrelationType
-import com.ofg.twitter.controller.relations.Relation
-import com.ofg.twitter.controller.relations.Relationship
+import com.ofg.judge.CorrelationType
+import com.ofg.judge.Relation
+import com.ofg.judge.Relationship
 import spock.lang.Specification
 
 class RelationshipControllerTest extends Specification {
