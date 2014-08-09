@@ -16,7 +16,22 @@ class AllRelationshipsTest extends Specification {
 
         then:
         object.get("_id") == relationships.pairId
-        objecy.get("PLACE") == []
+    }
+
+    def "should load back from DB object"() {
+        given:
+        def relationships = new AllRelationships(42)
+        relationships.relations.put(CorrelationType.PLACE, [new Relation(5, "Foo")])
+
+        when:
+        def object = relationships.toDbObject()
+        def loaded = AllRelationships.from(object)
+
+        then:
+        loaded.pairId == relationships.pairId
+        loaded.relations.get(CorrelationType.PLACE) == relationships.relations.get(CorrelationType.PLACE)
+        loaded.relations.get(CorrelationType.SENTENCE) == relationships.relations.get(CorrelationType.SENTENCE)
+        loaded.relations.get(CorrelationType.TOPIC) == relationships.relations.get(CorrelationType.TOPIC)
     }
 
 }

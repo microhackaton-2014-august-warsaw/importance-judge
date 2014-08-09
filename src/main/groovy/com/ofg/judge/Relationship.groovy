@@ -1,14 +1,6 @@
 package com.ofg.judge
 
-import java.io.IOException;
-
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.annotate.JsonValue;
-import org.codehaus.jackson.map.JsonSerializer
-import org.codehaus.jackson.map.SerializerProvider;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
+import com.mongodb.BasicDBObject
 import groovy.transform.Immutable
 import groovy.transform.ToString
 
@@ -32,6 +24,16 @@ class Relation implements Comparable<Relation>{
         return that.score - this.score
     }
 
+    public BasicDBObject toDbObject() {
+        BasicDBObject document = new BasicDBObject()
+        document.put("score", score)
+        document.put("description", description)
+        return document
+    }
+
+    public static Relation from(BasicDBObject obj) {
+        return new Relation(obj.get("score"), obj.get("description"))
+    }
 }
 
 //@JsonSerialize(using = CorrelationTypeSerializer.class)

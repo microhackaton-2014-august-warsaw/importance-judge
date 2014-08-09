@@ -1,5 +1,4 @@
 package com.ofg.judge.dao.mongodb
-
 import com.mongodb.*
 import com.ofg.judge.Relationship
 import com.ofg.judge.dao.JudgeDAO
@@ -31,29 +30,28 @@ class MongoDbDatabase implements JudgeDAO {
     @Override
     AllRelationships updateRelationship(Relationship newRelationship) {
         final DBCollection relationships = db.getCollection("relationships")
-        BasicDBObject idDoc = new BasicDBObject("_id", newRelationship.pairId.toString())
-        DBCursor existing = relationships.find(idDoc)
-
-        AllRelationships doc = findOrUpdate(existing, newRelationship)
+        AllRelationships doc = findOrUpdate(newRelationship, relationships)
+        doc.append(newRelationship)
         log.debug("Storing {}", doc)
         DBObject document = doc.toDbObject()
         relationships.save(document)
-        doc
+        return doc
     }
 
-    private AllRelationships findOrUpdate(DBCursor existing, Relationship newRelationship) {
-        AllRelationships all = existing.count() == 0 ?
+    private AllRelationships findOrUpdate(Relationship newRelationship, DBCollection relationships) {
+        BasicDBObject idDoc = new BasicDBObject("_id", newRelationship.pairId.toString())
+        DBCursor existing = relationships.find(idDoc)
+        existing.count() == 0 ?
                 insertNew(newRelationship) :
                 append(existing.next(), newRelationship)
-        all
     }
 
-    AllRelationships append(BSONObject bsonObject, def relationship) {
+
+    AllRelationships append(BSONObject bsonObject, Relationship relationship) {
         return AllRelationships.from(bsonObject)
     }
 
     AllRelationships insertNew(Relationship relationship) {
-        AllRelationships allRelationships = new AllRelationships(relationship)
-
+        return new AllRelationships(relationship)
     }
 }
