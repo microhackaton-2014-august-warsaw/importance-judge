@@ -7,26 +7,26 @@ import com.ofg.judge.Relationship;
 public class RelationshipExamples {
 
     static Relationship withFooPlace() {
-        return new Relationship(1, CorrelationType.PLACE, [new Relation(2, "foo")])
+        return new Relationship(1, CorrelationType.place, [new Relation(2, "foo")])
     }
 
     static Relationship withBarPlace() {
-        return new Relationship(1, CorrelationType.PLACE, [new Relation(8, "bar")])
+        return new Relationship(1, CorrelationType.place, [new Relation(8, "bar")])
     }
 
     static Relationship withWarsawPlace() {
-        return new Relationship(1, CorrelationType.PLACE, [new Relation(4, "warsaw")])
+        return new Relationship(1, CorrelationType.place, [new Relation(4, "warsaw")])
     }
 
     static Relationship withFooAndBarPlace() {
-        return new Relationship(1, CorrelationType.PLACE, [new Relation(8, "bar"), new Relation(2, "foo")])
+        return new Relationship(1, CorrelationType.place, [new Relation(8, "bar"), new Relation(2, "foo")])
     }
 
     static Relationship withFooAndBarAndWarsawPlace() {
-        return new Relationship(1, CorrelationType.PLACE, [new Relation(8, "bar"), new Relation(4, "warsaw"), new Relation(2, "foo")])
+        return new Relationship(1, CorrelationType.place, [new Relation(8, "bar"), new Relation(4, "warsaw"), new Relation(2, "foo")])
     }
 
     static Relationship withFooSentence() {
-        return new Relationship(1, CorrelationType.SENTENCE, [new Relation(8, "foo")])
+        return new Relationship(1, CorrelationType.sentence, [new Relation(8, "foo")])
     }
 }

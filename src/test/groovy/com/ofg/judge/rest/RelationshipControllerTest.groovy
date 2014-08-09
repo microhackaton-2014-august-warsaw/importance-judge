@@ -21,7 +21,7 @@ class RelationshipControllerTest extends Specification {
         controller.storeRelationship(sampleDto)
 
         then:
-        1 * daoMock.updateRelationship(new Relationship(1, CorrelationType.PLACE, [new Relation(8, "Warsaw")]))
+        1 * daoMock.updateRelationship(new Relationship(1, CorrelationType.place, [new Relation(8, "Warsaw")]))
     }
 
     def "should throw when bad correlator type"() {

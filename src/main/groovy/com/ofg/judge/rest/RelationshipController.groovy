@@ -62,7 +62,7 @@ class RelationshipController {
 
     private CorrelationType parseCorrelatorType(String correlatorType) {
         try {
-            return CorrelationType.valueOf(correlatorType)
+            return CorrelationType.valueOf(correlatorType.toLowerCase())
         } catch (IllegalArgumentException e) {
             throw new ValidationError("Bad correlation type: " + correlatorType)
         }
