@@ -1,5 +1,7 @@
 package com.ofg.judge.event.listener
 
+import java.util.List;
+
 import org.codehaus.jackson.map.ObjectMapper
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,6 +12,8 @@ import groovy.util.logging.Slf4j;
 
 import com.google.common.eventbus.EventBus
 import com.google.common.eventbus.Subscribe;
+import com.ofg.judge.CorrelationType
+import com.ofg.judge.Relation;
 import com.ofg.judge.event.RelationshipEvent;
 import com.ofg.judge.model.AllRelationships
 import com.ofg.twitter.controller.relations.extractor.RelationshipWorker
@@ -33,7 +37,30 @@ class RelationshipEventListener {
 	public handleRelationshipEvent(RelationshipEvent event) {
 		AllRelationships relationship = event.relationship
 		
-		String relationshipSerialized = objectMapper.writeValueAsString(event.relationship)
+		Map out = [:]
+		
+		out.pairId = relationship.pairId
+		out.relationships = []
+		relationship.relations.each {
+			CorrelationType key, List<Relation> val ->
+			
+			def relations = []
+			val.each {
+				Relation rel ->
+				
+				relations += [
+					score: rel.score,
+					description: rel.description
+				]
+			}
+			
+			out.relationships += [
+				correlatorType: key.name(),
+				relations: relations
+			]
+		}
+		
+		String relationshipSerialized = objectMapper.writeValueAsString(out)
 		log.debug(relationshipSerialized)
 		
 		relationshipWorker.passRelations(relationshipSerialized)
