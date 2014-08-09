@@ -1,10 +1,13 @@
 package com.ofg.judge.rest
+import com.ofg.judge.dao.JudgeDAO
 import com.ofg.twitter.controller.relations.CorrelationType
 import com.ofg.twitter.controller.relations.Relation
 import com.ofg.twitter.controller.relations.Relationship
 import groovy.transform.Immutable
 import groovy.transform.ToString
 import groovy.util.logging.Slf4j
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -19,6 +22,13 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT
 @RestController
 @RequestMapping('/relationship')
 class RelationshipController {
+	
+	final private JudgeDAO memoryDatabase
+	
+	@Autowired
+	public RelationshipController(JudgeDAO memoryDatabase) {
+		this.memoryDatabase = memoryDatabase
+	}
 
     @RequestMapping(
             method = PUT,
@@ -28,7 +38,11 @@ class RelationshipController {
         String correlatorType = relationship.correlatorType.toUpperCase()
         validateScores(relationship)
         final CorrelationType correlationType = parseCorrelatorType(correlatorType)
-        new Relationship(relationship.pairId, correlationType, relationship.relationships)
+        
+		Relationship entity = new Relationship(relationship.pairId, correlationType, relationship.relationships)
+		
+		memoryDatabase.updateRelationship(entity)
+		
     }
 
     private static Iterable<Relation> validateScores(RelationshipDto relationship) {

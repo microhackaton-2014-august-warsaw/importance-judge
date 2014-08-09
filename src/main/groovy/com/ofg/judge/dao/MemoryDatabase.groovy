@@ -1,9 +1,11 @@
 package com.ofg.judge.dao
 
+import org.springframework.stereotype.Repository;
+
 import com.ofg.twitter.controller.relations.Relation
 import com.ofg.twitter.controller.relations.Relationship
 
-
+@Repository
 class MemoryDatabase implements JudgeDAO{
     final List<Relationship> relationships;
 
