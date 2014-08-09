@@ -38,6 +38,7 @@ class MongoDbDatabase implements JudgeDAO {
         log.debug("Storing {}", doc)
         DBObject document = doc.toDbObject()
         relationships.save(document)
+        doc
     }
 
     private AllRelationships findOrUpdate(DBCursor existing, Relationship newRelationship) {
