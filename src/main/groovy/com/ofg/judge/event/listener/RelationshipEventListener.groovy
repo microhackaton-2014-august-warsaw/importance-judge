@@ -11,7 +11,7 @@ import groovy.util.logging.Slf4j;
 import com.google.common.eventbus.EventBus
 import com.google.common.eventbus.Subscribe;
 import com.ofg.judge.event.RelationshipEvent;
-import com.ofg.twitter.controller.relations.AllRelationships
+import com.ofg.judge.model.AllRelationships
 import com.ofg.twitter.controller.relations.extractor.RelationshipWorker
 
 @Slf4j
