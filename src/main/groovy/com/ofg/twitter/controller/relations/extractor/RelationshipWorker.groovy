@@ -13,13 +13,19 @@ class RelationshipWorker {
     private final RestTemplate restTemplate
 
     @Autowired
-    RelationshipWorker(ServiceResolver serviceResolver) {
+    RelationshipWorker(ServiceResolver serviceResolver, RestTemplate restTemplate) {
         this.serviceResolver = serviceResolver
         this.restTemplate = restTemplate
     }
 
     void passRelations(String request) {
-        restTemplate.putForObject("${serviceResolver.getUrl("gui").get()}", request, String)
+        try{
+            String adress = serviceResolver.getUrl("gui").get() + "/rest/results/result"
+            log.error("Adress: $adress and request: $request")
+            restTemplate.putForObject(adress, request, String)
+        } catch(Exception e){
+            log.error("Catch log", e)
+        }
         log.debug("Sent json [$request] to collerator")
     }
 }

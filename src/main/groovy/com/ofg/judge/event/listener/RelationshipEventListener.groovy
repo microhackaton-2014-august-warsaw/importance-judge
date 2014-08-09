@@ -36,6 +36,6 @@ class RelationshipEventListener {
 		String relationshipSerialized = objectMapper.writeValueAsString(event.relationship)
 		log.debug(relationshipSerialized)
 		
-//		relationshipWorker.passRelations(relationshipSerialized)
+		relationshipWorker.passRelations(relationshipSerialized)
 	}
 }
