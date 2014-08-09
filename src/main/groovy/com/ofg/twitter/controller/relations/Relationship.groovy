@@ -7,7 +7,7 @@ import groovy.transform.ToString
 @Immutable
 class Relationship{
     final int pairId
-    final CorrelationType correlationType
+    final CorrelationType correlatorType
     final ArrayList<Relation> relations
 }
 
