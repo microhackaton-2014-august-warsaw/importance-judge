@@ -8,7 +8,7 @@ class AllRelationshipsTest extends Specification {
 
     def "should turn all relationships into DB object"() {
         given:
-        def relationships = new AllRelationships(42)
+        def relationships = new AllRelationships("42")
         relationships.relations.put(CorrelationType.place, [new Relation(5, "Foo")])
 
         when:
@@ -20,7 +20,7 @@ class AllRelationshipsTest extends Specification {
 
     def "should load back from DB object"() {
         given:
-        def relationships = new AllRelationships(42)
+        def relationships = new AllRelationships("42")
         relationships.relations.put(CorrelationType.place, [new Relation(5, "Foo")])
 
         when:

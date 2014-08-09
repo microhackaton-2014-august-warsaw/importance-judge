@@ -9,7 +9,7 @@ import org.bson.BSONObject
 
 class AllRelationships {
 
-    final int pairId
+    final String pairId
     final Map<CorrelationType, List<Relation>> relations
 
     AllRelationships() {
@@ -17,12 +17,12 @@ class AllRelationships {
         CorrelationType.values().each {relations.put(it, [])}
     }
 
-    AllRelationships(int pairId) {
+    AllRelationships(String pairId) {
         this()
         this.pairId = pairId
     }
 
-    AllRelationships(int pairId, Map<CorrelationType, List<Relation>> relations) {
+    AllRelationships(String pairId, Map<CorrelationType, List<Relation>> relations) {
         this.pairId = pairId
         this.relations = relations
     }
@@ -34,7 +34,7 @@ class AllRelationships {
     }
 
     static AllRelationships from(BSONObject bsonObject) {
-        final int pairId = bsonObject.get("_id") as int
+        final String pairId = bsonObject.get("_id") as String
         Map<CorrelationType, List<Relation>> map = new EnumMap<>(CorrelationType)
         CorrelationType.values().collect { type ->
             BasicDBList relationsList = bsonObject.get(type.toString()) as BasicDBList

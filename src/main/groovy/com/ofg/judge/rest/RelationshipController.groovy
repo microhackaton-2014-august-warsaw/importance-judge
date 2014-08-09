@@ -1,16 +1,16 @@
 package com.ofg.judge.rest
+
 import com.google.common.eventbus.EventBus
-import com.ofg.judge.dao.JudgeDAO
-import com.ofg.judge.event.RelationshipEvent
-import com.ofg.judge.model.AllRelationships
 import com.ofg.judge.CorrelationType
 import com.ofg.judge.Relation
 import com.ofg.judge.Relationship
+import com.ofg.judge.dao.JudgeDAO
+import com.ofg.judge.event.RelationshipEvent
+import com.ofg.judge.model.AllRelationships
 import groovy.transform.Immutable
 import groovy.transform.ToString
 import groovy.util.logging.Slf4j
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -80,7 +80,7 @@ class ValidationError extends RuntimeException {
 @ToString
 @Immutable
 class RelationshipDto {
-    final int pairId
+    final String pairId
     final String correlatorType
     final ArrayList<Relation> relationships
 }
