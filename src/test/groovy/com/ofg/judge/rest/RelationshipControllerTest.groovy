@@ -1,4 +1,6 @@
 package com.ofg.judge.rest
+
+import com.google.common.eventbus.EventBus
 import com.ofg.judge.dao.JudgeDAO
 import com.ofg.twitter.controller.relations.CorrelationType
 import com.ofg.twitter.controller.relations.Relation
@@ -7,10 +9,12 @@ import spock.lang.Specification
 
 class RelationshipControllerTest extends Specification {
 
+    EventBus eventBus = Mock(EventBus)
+
     def "should store relationship in store"() {
         given:
         JudgeDAO daoMock = Mock(JudgeDAO)
-        RelationshipController controller = new RelationshipController(daoMock)
+        RelationshipController controller = new RelationshipController(daoMock,eventBus)
         RelationshipDto sampleDto = new RelationshipDto(1, "place", [new Relation(8, "Warsaw")])
 
         when:
@@ -23,7 +27,7 @@ class RelationshipControllerTest extends Specification {
     def "should throw when bad correlator type"() {
         given:
         JudgeDAO daoMock = Mock(JudgeDAO)
-        RelationshipController controller = new RelationshipController(daoMock)
+        RelationshipController controller = new RelationshipController(daoMock, eventBus)
         RelationshipDto sampleDto = new RelationshipDto(1, "plejs", [new Relation(8, "Warsaw")])
 
         when:
@@ -37,7 +41,7 @@ class RelationshipControllerTest extends Specification {
     def "should throw when too low score"() {
         given:
         JudgeDAO daoMock = Mock(JudgeDAO)
-        RelationshipController controller = new RelationshipController(daoMock)
+        RelationshipController controller = new RelationshipController(daoMock, eventBus)
         RelationshipDto sampleDto = new RelationshipDto(1, "sentence", [new Relation(-1, "Warsaw")])
 
         when:
