@@ -111,6 +111,7 @@ dependencies {
     compile "com.mangofactory:swagger-springmvc:0.8.5"
     compile 'org.codehaus.gpars:gpars:1.2.1'
     compile 'net.sf.ehcache:ehcache:2.8.3'
+    compile 'org.mongodb:mongo-java-driver:2.12.3'
     // microservices
     compile("com.ofg:micro-deps-spring-config:$microDepsSpringVersion") {
         exclude group: 'org.slf4j'
