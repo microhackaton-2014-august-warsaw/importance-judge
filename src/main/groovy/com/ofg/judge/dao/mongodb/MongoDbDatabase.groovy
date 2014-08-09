@@ -1,5 +1,5 @@
 package com.ofg.judge.dao.mongodb
-
+import com.mongodb.BasicDBObject
 import com.mongodb.DB
 import com.mongodb.DBCollection
 import com.mongodb.MongoClient
@@ -28,7 +28,12 @@ class MongoDbDatabase implements JudgeDAO {
 
     @Override
     Relationship updateRelationship(Relationship newRelationship) {
-        log.info("Storing: ")
         final DBCollection relationships = db.getCollection("relationships")
+
+        BasicDBObject document = newRelationship.toDbObject()
+        log.info("Storing: {}", document)
+        relationships.insert(document)
+        return newRelationship
     }
+
 }
