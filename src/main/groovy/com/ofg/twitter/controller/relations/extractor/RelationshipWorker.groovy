@@ -1,6 +1,7 @@
 package com.ofg.twitter.controller.relations.extractor
 
 import com.ofg.infrastructure.discovery.ServiceResolver
+import com.ofg.infrastructure.web.filter.correlationid.CorrelationIdHolder
 import com.ofg.infrastructure.web.resttemplate.RestTemplate
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,6 +27,7 @@ class RelationshipWorker {
             log.debug("Adress: $adress and request: $request")
             HttpHeaders headers = new HttpHeaders();
             headers.set("Content-Type", "application/vnd.gui.v1+json");
+            headers.set("correlationId", CorrelationIdHolder.get())
 
             HttpEntity<String> entity = new HttpEntity<String>(request,headers);
 
