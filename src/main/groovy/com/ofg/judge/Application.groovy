@@ -14,7 +14,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy
 @Configuration
 @EnableAutoConfiguration
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@ComponentScan(basePackages = ["com.ofg.judge", "com.ofg.twitter" ,"com.mangofactory.swagger"])
+@ComponentScan(basePackages = ["com.ofg.judge", "com.ofg.twitter" ,"com.ofg.twitter.controller.relations.extractor","com.mangofactory.swagger"])
 @EnableCaching
 class Application {
 
