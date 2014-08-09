@@ -36,7 +36,7 @@ class AllRelationships {
     static AllRelationships from(BSONObject bsonObject) {
         final int pairId = bsonObject.get("_id") as int
         Map<CorrelationType, List<Relation>> map = new EnumMap<>(CorrelationType)
-        List<Relation> parsed = CorrelationType.values().collect { type ->
+        CorrelationType.values().collect { type ->
             BasicDBList relationsList = bsonObject.get(type.toString()) as BasicDBList
             def relations = relationsList.collect {
                 return Relation.from(it)

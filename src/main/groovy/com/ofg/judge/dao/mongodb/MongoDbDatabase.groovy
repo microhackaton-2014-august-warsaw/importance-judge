@@ -45,15 +45,15 @@ class MongoDbDatabase implements JudgeDAO {
         DBCursor existing = relationships.find(idDoc)
         existing.count() == 0 ?
                 insertNew(newRelationship) :
-                append(existing.next(), newRelationship)
+                append(existing.next())
     }
 
 
-    AllRelationships append(BSONObject bsonObject, Relationship relationship) {
+    AllRelationships append(BSONObject bsonObject) {
         return AllRelationships.from(bsonObject)
     }
 
     AllRelationships insertNew(Relationship relationship) {
-        return new AllRelationships(relationship)
+        return new AllRelationships(relationship.pairId)
     }
 }
