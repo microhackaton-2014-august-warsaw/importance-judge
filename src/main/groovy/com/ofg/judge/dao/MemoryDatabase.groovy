@@ -1,12 +1,9 @@
 package com.ofg.judge.dao
 
-import com.ofg.judge.model.AllRelationships
-import org.springframework.stereotype.Repository;
-
 import com.ofg.judge.Relation
 import com.ofg.judge.Relationship
+import com.ofg.judge.model.AllRelationships
 
-@Repository
 class MemoryDatabase implements JudgeDAO{
     final List<Relationship> relationships;
 

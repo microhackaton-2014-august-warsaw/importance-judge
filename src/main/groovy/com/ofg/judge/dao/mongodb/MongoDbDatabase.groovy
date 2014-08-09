@@ -7,11 +7,13 @@ import groovy.transform.TypeChecked
 import groovy.util.logging.Slf4j
 import org.bson.BSONObject
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Repository
 
 import javax.annotation.PostConstruct
 
 @Slf4j
 @TypeChecked
+@Repository
 class MongoDbDatabase implements JudgeDAO {
 
     private final MongoClient mongoClient
@@ -39,7 +41,7 @@ class MongoDbDatabase implements JudgeDAO {
     }
 
     private AllRelationships findOrUpdate(Relationship newRelationship, DBCollection relationships) {
-        BasicDBObject idDoc = new BasicDBObject("_id", newRelationship.pairId.toString())
+        BasicDBObject idDoc = new BasicDBObject("_id", newRelationship.pairId)
         DBCursor existing = relationships.find(idDoc)
         existing.count() == 0 ?
                 insertNew(newRelationship) :
