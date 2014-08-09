@@ -34,7 +34,7 @@ class RelationshipController {
             method = PUT,
             consumes = 'application/vnd.com.ofg.importance-judge.v1+json',
             produces = 'application/vnd.com.ofg.importance-judge.v1+json')
-    void getPlacesFromTweets(@RequestBody @NotNull RelationshipDto relationship) {
+    void storeRelationship(@RequestBody @NotNull RelationshipDto relationship) {
         String correlatorType = relationship.correlatorType.toUpperCase()
         validateScores(relationship)
         final CorrelationType correlationType = parseCorrelatorType(correlatorType)
@@ -57,7 +57,7 @@ class RelationshipController {
         try {
             return CorrelationType.valueOf(correlatorType)
         } catch (IllegalArgumentException e) {
-            throw new ValidationError("Bad correlation typy: " + correlatorType)
+            throw new ValidationError("Bad correlation type: " + correlatorType)
         }
     }
 
