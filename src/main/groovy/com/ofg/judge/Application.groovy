@@ -5,6 +5,9 @@ import com.ofg.infrastructure.environment.EnvironmentSetupVerifier
 import com.ofg.judge.event.listener.RelationshipEventListener
 import com.ofg.microservice.Profiles
 import groovy.transform.TypeChecked
+
+import org.codehaus.jackson.map.ObjectMapper
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.cache.CacheManager;
@@ -18,7 +21,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy
 @Configuration
 @EnableAutoConfiguration
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@ComponentScan(basePackages = ["com.ofg.judge", "com.mangofactory.swagger"])
+@ComponentScan(basePackages = ["com.ofg.judge", "com.mangofactory.swagger", "com.ofg.twitter", "com.ofg.infrastructure"])
 @EnableCaching
 class Application {
 
@@ -32,8 +35,13 @@ class Application {
 	EventBus eventBus() {
 		EventBus eventBus = new EventBus()
 		
-		eventBus.register(new RelationshipEventListener())
-		
 		return eventBus
+	}
+	
+	@Bean
+	ObjectMapper objectMapper() {
+		ObjectMapper objectMapper = new ObjectMapper()
+		
+		return objectMapper
 	}
 }

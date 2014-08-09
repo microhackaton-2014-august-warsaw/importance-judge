@@ -1,12 +1,13 @@
 package com.ofg.judge.event
 
 import com.ofg.judge.Relationship
+import com.ofg.judge.model.AllRelationships
 
 class RelationshipEvent {
 	
-	final public Relationship relationship
+	final public AllRelationships relationship
 
-	public RelationshipEvent(Relationship relationship) {
+	public RelationshipEvent(AllRelationships relationship) {
 		this.relationship = relationship
 	}
 }
