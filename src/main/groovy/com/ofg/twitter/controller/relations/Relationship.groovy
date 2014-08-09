@@ -13,9 +13,14 @@ class Relationship{
 
 @ToString
 @Immutable
-class Relation {
+class Relation implements Comparable<Relation>{
     final int score
     final String description
+
+    @Override
+    int compareTo(Relation that) {
+        return that.score - this.score
+    }
 }
 
 

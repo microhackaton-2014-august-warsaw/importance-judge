@@ -14,7 +14,19 @@ public class RelationshipExamples {
         return new Relationship(1, CorrelationType.PLACE, [new Relation(8, "bar")])
     }
 
+    static Relationship withWarsawPlace() {
+        return new Relationship(1, CorrelationType.PLACE, [new Relation(4, "warsaw")])
+    }
+
     static Relationship withFooAndBarPlace() {
-        return new Relationship(1, CorrelationType.PLACE, [new Relation(2, "foo"),new Relation(8, "bar")])
+        return new Relationship(1, CorrelationType.PLACE, [new Relation(8, "bar"), new Relation(2, "foo")])
+    }
+
+    static Relationship withFooAndBarAndWarsawPlace() {
+        return new Relationship(1, CorrelationType.PLACE, [new Relation(8, "bar"), new Relation(4, "warsaw"), new Relation(2, "foo")])
+    }
+
+    static Relationship withFooSentence() {
+        return new Relationship(1, CorrelationType.SENTENCE, [new Relation(8, "foo")])
     }
 }

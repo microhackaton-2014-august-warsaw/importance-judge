@@ -23,6 +23,7 @@ class MemoryDatabase implements JudgeDAO{
             workingRelations.addAll(newRelationship.getRelations())
 
             relationships.remove(workingRelationship)
+            Collections.sort(workingRelations)
             Relationship updatedRelationship = new Relationship(workingRelationship.pairId, workingRelationship.correlationType, workingRelations)
             relationships.add(updatedRelationship)
             return updatedRelationship
