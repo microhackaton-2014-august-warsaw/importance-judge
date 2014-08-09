@@ -17,7 +17,7 @@ env:
 
 after_success:
 # Add deployToAws to deploy to AWS :)
-#- ./gradlew build deployToAws -PbuildNr=$TRAVIS_BUILD_NUMBER --info --stacktrace
+- ./gradlew build deployToAws -PbuildNr=$TRAVIS_BUILD_NUMBER --info --stacktrace
 - ./gradlew build -PbuildNr=$TRAVIS_BUILD_NUMBER --info --stacktrace
 - ./gradlew test jacocoTestReport coveralls -Pcoverage
 
