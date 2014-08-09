@@ -1,4 +1,4 @@
-package com.ofg.microservice.config
+package com.ofg.judge.config
 import com.ofg.infrastructure.discovery.ServiceResolverConfiguration
 import groovy.transform.TypeChecked
 import org.springframework.context.annotation.Configuration

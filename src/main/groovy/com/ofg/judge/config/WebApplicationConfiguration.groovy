@@ -1,4 +1,4 @@
-package com.ofg.microservice.config
+package com.ofg.judge.config
 
 import com.ofg.infrastructure.config.WebAppConfiguration
 import com.ofg.infrastructure.web.config.SwaggerConfiguration

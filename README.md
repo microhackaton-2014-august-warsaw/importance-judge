@@ -20,17 +20,17 @@ In this template we are using the following 4finance custom libraries (available
 
 Below you can find description of the most crucial parts of the application's production code.
 
-##### *com.ofg.microservice.Application* 
+##### *com.ofg.judge.Application*
 
 contains Spring Boot autoconfiguration and contains *main* method
 
-##### *com.ofg.microservice.config.ServiceDiscoveryConfiguration* 
+##### *com.ofg.judge.config.ServiceDiscoveryConfiguration*
 
 imports configuration from [4finance's "Micro Deps Spring Config" library (micro-deps-spring-config module)](https://github.com/4finance/micro-deps-spring-config) 
 that contains Service Discovery configuration. For Service Discovery we are using Zookeeper from [4finance's "Micro Deps" library](https://github.com/4finance/micro-deps).
 Note: **This configuration should not be imported in the same profiles as tests since the application will try to connect to a running Zookeeper instance.**
 
-##### *com.ofg.microservice.config.WebAppConfiguration*
+##### *com.ofg.judge.config.WebAppConfiguration*
 
 imports configuration from [4finance's "Micro Infra Spring"](https://github.com/4finance/micro-infra-spring). That module contains all common web configuration like
 Swagger, CorrelationId filters, custom RestTemplate, custom exception handling, health check controllers etc.
