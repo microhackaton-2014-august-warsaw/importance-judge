@@ -11,7 +11,7 @@ public class PersistenceConfiguration {
 
     @Bean
     MongoClient mongoClient() throws UnknownHostException {
-        return new MongoClient();
+        return new MongoClient("mongo.microhackathon.pl:27017");
     }
 
 }
