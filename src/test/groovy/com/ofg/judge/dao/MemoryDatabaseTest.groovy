@@ -2,8 +2,10 @@ package com.ofg.judge.dao
 
 import com.ofg.judge.Relationship
 import com.ofg.twitter.places.RelationshipExamples
+import spock.lang.Ignore
 import spock.lang.Specification
 
+@Ignore
 class MemoryDatabaseTest extends Specification {
 
     def "With empty database, new request should be the same"() {
